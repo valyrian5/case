@@ -18,13 +18,10 @@ type GameDetailProps = {
   route: any;
 };
 
-const GameDetailScreen: React.FC<GameDetailProps> = ({
-  navigation,
-  route,
-}) => {
+const GameDetailScreen: React.FC<GameDetailProps> = ({navigation, route}) => {
   const [game, setGame] = useState<GameDetail | null>(null);
 
-  const {handleFavourite} = useGames();
+  const {handleFavourite, checkFavourites} = useGames();
 
   useEffect(() => {
     axios
@@ -64,7 +61,11 @@ const GameDetailScreen: React.FC<GameDetailProps> = ({
             <TouchableOpacity
               onPress={() => handleFavourite(route?.params?.gameId)}
               style={styles.button}>
-              <Text style={styles.buttonText}>Heart</Text>
+              {checkFavourites(route?.params?.gameId) ? (
+                <Text>💔</Text>
+              ) : (
+                <Text>❤️</Text>
+              )}
             </TouchableOpacity>
           </View>
           <Image source={{uri: game.iconURL}} style={styles.icon} />
@@ -79,7 +80,5 @@ const GameDetailScreen: React.FC<GameDetailProps> = ({
     </SafeAreaView>
   );
 };
-
-
 
 export default GameDetailScreen;

@@ -14,7 +14,7 @@ type GameProps = {
 };
 
 const Favourites: React.FC<GameProps> = ({navigation}) => {
-    const {setAllGames, handleFavourite,favourites} = useGames();
+    const {setAllGames, handleFavourite,favourites,checkFavourites} = useGames();
 
   const {top} = useSafeAreaInsets();
 
@@ -55,6 +55,7 @@ const Favourites: React.FC<GameProps> = ({navigation}) => {
               navigation.navigate('GameDetail', {gameId: item?.id})
             }
             handleFavourite={() => handleFavourite(item?.id)}
+            checkFavourites={checkFavourites}
           />
         )}
       />

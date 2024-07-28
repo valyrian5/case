@@ -8,6 +8,7 @@ type GameCardProps = {
   iconUrl: string;
   navigate: () => void;
   handleFavourite: (id: number) => void;
+  checkFavourites: (id: number) => boolean;
 };
 
 const GameCard: React.FC<GameCardProps> = ({
@@ -17,6 +18,7 @@ const GameCard: React.FC<GameCardProps> = ({
   navigate,
   id,
   handleFavourite,
+  checkFavourites,
 }) => {
   return (
     <View style={styles.card}>
@@ -31,7 +33,7 @@ const GameCard: React.FC<GameCardProps> = ({
             </View>
           </View>
           <TouchableOpacity onPress={() => handleFavourite(id)}>
-            <Text style={styles.heart}>♥️</Text>
+            {checkFavourites(id) ? <Text>💔</Text> : <Text>❤️</Text>}
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.button} onPress={navigate}>

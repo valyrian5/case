@@ -6,6 +6,7 @@ type GamesContextType = {
   favourites: Game[];
   handleFavourite: (id: number) => void;
   setAllGames: (games: Game[]) => void;
+  checkFavourites: (id: number) => boolean;
 };
 
 const GamesContext = createContext<GamesContextType | undefined>(undefined);
@@ -25,6 +26,11 @@ export const GamesProvider: React.FC<{children: ReactNode}> = ({children}) => {
   const setAllGames = (games: Game[]) => {
     setGames(games);
   };
+  
+
+  const checkFavourites = (id: number) => {
+    return favourites.some(fav => fav.id === id);
+  }
 
   return (
     <GamesContext.Provider
@@ -33,6 +39,7 @@ export const GamesProvider: React.FC<{children: ReactNode}> = ({children}) => {
         favourites,
         handleFavourite,
         setAllGames,
+        checkFavourites,
       }}>
       {children}
     </GamesContext.Provider>
